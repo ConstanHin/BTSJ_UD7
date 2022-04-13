@@ -9,10 +9,8 @@ public class UnoApp {
 
 	static Scanner scnr = new Scanner(System.in);
 
+	// Calcular la nota media de los alumnos
 	public static void main(String[] args) {
-		/*
-		 * Calcular la nota media de los alumnos
-		 */
 
 		// Crear tabla alumnos
 		Hashtable<String, Double> tablaAlumnos = new Hashtable<String, Double>();
@@ -32,6 +30,8 @@ public class UnoApp {
 		System.out.println("Notas medias de los alumnos: ");
 		System.out.println(tablaAlumnos);
 		System.out.println("----------------------------");
+		
+		scnr.close();
 
 	}
 
