@@ -6,7 +6,8 @@ import javax.swing.JOptionPane;
 
 public class DosApp {
 	// {nombre,iva,precio}
-	private static final String[][] productos = { { "patata", "4", "1" }, { "zanahoria", "4", "0.75" }, {"tomate", "4", "1.29"}, {"jabon", "21", "2.95"}};
+	private static final String[][] productos = { { "patata", "4", "1" }, { "zanahoria", "4", "0.75" },
+			{ "tomate", "4", "1.29" }, { "jabon", "21", "2.95" } };
 	private static int totalCantidadArticulos = 0;
 
 	public static void main(String[] args) {
@@ -19,7 +20,9 @@ public class DosApp {
 		while (addingProducts) {
 			// Añadir producto
 			String[] producto = escogerProducto(productos);
-			if(producto == null) {continue;}
+			if (producto == null) {
+				continue;
+			}
 
 			// Añadir cantidad
 			double cantidad = escogerCantidad();
@@ -42,11 +45,29 @@ public class DosApp {
 			addingProducts = addMoreProducts();
 
 		}
-		String cantidadPagadaString = JOptionPane.showInputDialog(null, "Cantidad pagada", "Cantidad pagada", JOptionPane.PLAIN_MESSAGE);
+		String cantidadPagadaString = JOptionPane.showInputDialog(null, "Cantidad pagada", "Cantidad pagada",
+				JOptionPane.PLAIN_MESSAGE);
 		double cantidadPagada = Double.parseDouble(cantidadPagadaString);
 		double cambio = cantidadPagada - totalConIva;
 		cambio = roundTwoDecimals(cambio);
-		
+
+		listaProductos = formatTicketString(listaProductos, totalSinIva, totalConIva, cantidadPagada, cambio);
+
+		JOptionPane.showMessageDialog(null, listaProductos, "Ticket", JOptionPane.PLAIN_MESSAGE);
+	}
+
+	/**
+	 * Formatear la lista de productos para mostrar
+	 * 
+	 * @param listaProductos
+	 * @param totalSinIva
+	 * @param totalConIva
+	 * @param cantidadPagada
+	 * @param cambio
+	 * @return
+	 */
+	private static String formatTicketString(String listaProductos, double totalSinIva, double totalConIva,
+			double cantidadPagada, double cambio) {
 		listaProductos += "------------------------------------------------- \n";
 		listaProductos += "Nr total productos:" + totalCantidadArticulos + "\n";
 		listaProductos += "Precio total sin IVA- " + totalSinIva + "€ \n";
@@ -54,8 +75,7 @@ public class DosApp {
 		listaProductos += "------------------------------------------------- \n";
 		listaProductos += "Cantidad pagada: " + cantidadPagada + "€ \n";
 		listaProductos += "Cambio: " + cambio + "€ \n";
-
-		JOptionPane.showMessageDialog(null, listaProductos, "Ticket", JOptionPane.PLAIN_MESSAGE);
+		return listaProductos;
 	}
 
 	/**
@@ -71,8 +91,8 @@ public class DosApp {
 	 */
 	private static String formatListString(String nombreProducto, String iva, String precio, double precioSinIva,
 			double cantidad, double precioConIva) {
-		String formatedString = nombreProducto + "- " + cantidad + " u x " + precio + "€/u " + precioSinIva
-				+ "€ " + " iva " + iva + "% " + precioConIva + "€ \n";
+		String formatedString = nombreProducto + "- " + cantidad + " u x " + precio + "€/u " + precioSinIva + "€ "
+				+ " iva " + iva + "% " + precioConIva + "€ \n";
 		return formatedString;
 	}
 
@@ -93,6 +113,7 @@ public class DosApp {
 
 	/**
 	 * Calcular el precio total sin iva
+	 * 
 	 * @param producto
 	 * @param cantidad
 	 * @return
@@ -153,7 +174,7 @@ public class DosApp {
 		return null;
 
 	}
-	
+
 	/**
 	 * 
 	 * @return
