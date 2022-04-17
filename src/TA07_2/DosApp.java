@@ -134,7 +134,7 @@ public class DosApp {
 	}
 
 	/**
-	 * 
+	 * Devuelve el producto introducido
 	 * 
 	 * @param productos
 	 */
@@ -154,6 +154,9 @@ public class DosApp {
 	}
 
 	/**
+	 * Comprueba si el producto existe. 
+	 * Lo devuelve si existe. 
+	 * Devuelve null si no existe.
 	 * 
 	 * @param producto
 	 * @param productos
@@ -174,8 +177,9 @@ public class DosApp {
 	}
 
 	/**
+	 * Devuelve la cantidad de productos
 	 * 
-	 * @return
+	 * @return double - La cantidad de productos
 	 */
 	public static double escogerCantidad() {
 		String inputCantidad = JOptionPane.showInputDialog(null, "Introduzca la cantidad: ", "Cantidad",
