@@ -1,7 +1,5 @@
 package TA07_2;
 
-import java.util.Hashtable;
-
 import javax.swing.JOptionPane;
 
 public class DosApp {
@@ -66,7 +64,7 @@ public class DosApp {
 	 * @param cambio
 	 * @return
 	 */
-	private static String formatTicketString(String listaProductos, double totalSinIva, double totalConIva,
+	public static String formatTicketString(String listaProductos, double totalSinIva, double totalConIva,
 			double cantidadPagada, double cambio) {
 		listaProductos += "------------------------------------------------- \n";
 		listaProductos += "Nr total productos:" + totalCantidadArticulos + "\n";
@@ -89,7 +87,7 @@ public class DosApp {
 	 * @param precioConIva
 	 * @return
 	 */
-	private static String formatListString(String nombreProducto, String iva, String precio, double precioSinIva,
+	public static String formatListString(String nombreProducto, String iva, String precio, double precioSinIva,
 			double cantidad, double precioConIva) {
 		String formatedString = nombreProducto + "- " + cantidad + " u x " + precio + "€/u " + precioSinIva + "€ "
 				+ " iva " + iva + "% " + precioConIva + "€ \n";
@@ -103,9 +101,9 @@ public class DosApp {
 	 * @param ivaString
 	 * @return
 	 */
-	private static double calcularPrecioConIva(double precioSinIva, String ivaString) {
+	public static double calcularPrecioConIva(double precioSinIva, String ivaString) {
 		double iva = Double.parseDouble(ivaString);
-		double precioIva = precioSinIva * 21 / 100;
+		double precioIva = precioSinIva * iva / 100;
 		double totalConIva = precioSinIva + precioIva;
 		totalConIva = roundTwoDecimals(totalConIva);
 		return totalConIva;
@@ -118,7 +116,7 @@ public class DosApp {
 	 * @param cantidad
 	 * @return
 	 */
-	private static double calcularPrecioSinIva(String[] producto, double cantidad) {
+	public static double calcularPrecioSinIva(String[] producto, double cantidad) {
 		double precioProducto = Double.parseDouble(producto[2]);
 		double totalSinIva = precioProducto * cantidad;
 		totalSinIva = roundTwoDecimals(totalSinIva);
@@ -187,10 +185,10 @@ public class DosApp {
 	}
 
 	/**
-	 * 
+	 * Utilizado para seguir añadiendo productos
 	 * @return
 	 */
-	private static boolean addMoreProducts() {
+	public static boolean addMoreProducts() {
 		int response = JOptionPane.showConfirmDialog(null, "¿Quiere añadir mas productos?");
 
 		if (response == 1) {
