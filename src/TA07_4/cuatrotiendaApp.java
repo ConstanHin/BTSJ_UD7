@@ -12,6 +12,7 @@ public class cuatrotiendaApp {
 
 	static private boolean running = true; // Utilizado para terminar la ejecución
 	static private Scanner scnr = new Scanner(System.in);
+	static private Hashtable<String, Integer> ivaArticulos = new Hashtable<String, Integer>();
 	static private Hashtable<String, Double> articulos = new Hashtable<String, Double>();
 	static private Hashtable<String, Integer> cesta = new Hashtable<>();
 	static private double totalSinIva = 0;
@@ -19,38 +20,14 @@ public class cuatrotiendaApp {
 	static private int totalCantidadArticulos = 0;
 
 	public static void main(String[] args) {
-		// Crear base de datos de artículos con Hashtable
-		articulos.put("patata", 1.25);
-		articulos.put("zanahoria", 2.25);
-		articulos.put("berenjena", 0.57);
-		articulos.put("pimiento", 0.90);
-		articulos.put("pan", 0.35);
-		articulos.put("ajo", 0.32);
-		articulos.put("jabon", 3.0);
-		articulos.put("manzana", 1.99);
-		articulos.put("tomate", 1.10);
-		articulos.put("platano", 1.40);
+		
+		crearListaProductos();
 
 		while (running) {
 			// Opciones
 			seleccionarOpcion(articulos);
 		}
 
-		// Mostrar nombre articulo
-//		mostrarInfoArticulo(articulos);
-
-		// Mostrar lista de articulos
-//		consultarArticulos(articulos);
-
-//		String cantidadPagadaString = JOptionPane.showInputDialog(null, "Cantidad pagada", "Cantidad pagada",
-//				JOptionPane.PLAIN_MESSAGE);
-//		double cantidadPagada = Double.parseDouble(cantidadPagadaString);
-//		double cambio = cantidadPagada - totalConIva;
-//		cambio = roundTwoDecimals(cambio);
-
-//		listaProductos = formatTicketString(listaProductos, totalSinIva, totalConIva, cantidadPagada, cambio);
-
-//		JOptionPane.showMessageDialog(null, listaProductos, "Ticket", JOptionPane.PLAIN_MESSAGE);
 		scnr.close();
 	}
 
@@ -324,6 +301,9 @@ public class cuatrotiendaApp {
 	 * 
 	 */
 	public static void imprimirTicket() {
+		// Calcular iva
+		calcularPrecioSinIva(null, totalCantidadArticulos);
+//		calcularPrecioConIva(totalCantidadArticulos, null);
 
 		System.out.println("--------------------");
 		System.out.println("Introducir cantidad pagada:");
@@ -332,7 +312,6 @@ public class cuatrotiendaApp {
 		double cambio = cantidadPagada - totalConIva;
 		cambio = roundTwoDecimals(cambio);
 
-		mostrarProductos();
 
 		String listaProductos = formatTicketString(cantidadPagada, cambio);
 		System.out.println(listaProductos);
@@ -350,9 +329,10 @@ public class cuatrotiendaApp {
 	 * @return
 	 */
 	public static String formatTicketString(double cantidadPagada, double cambio) {
+		mostrarProductos();
 		String listaProductos = "";
 		listaProductos += "------------------------------------------------- \n";
-		listaProductos += "Nr total productos:" + totalCantidadArticulos + "\n";
+		listaProductos += "Total productos: " + totalCantidadArticulos + "\n";
 		listaProductos += "Precio total sin IVA- " + totalSinIva + "€ \n";
 		listaProductos += "Precio total con IVA- " + totalConIva + "€ \n";
 		listaProductos += "------------------------------------------------- \n";
@@ -476,6 +456,36 @@ public class cuatrotiendaApp {
 			return true;
 		}
 
+	}
+	
+	/**
+	 * Crear los productos con la información del precio e iva
+	 */
+	private static void crearListaProductos() {
+		
+		// Crear base de datos de artículos con Hashtable
+		articulos.put("patata", 1.25);
+		articulos.put("zanahoria", 2.25);
+		articulos.put("berenjena", 0.57);
+		articulos.put("pimiento", 0.90);
+		articulos.put("pan", 0.35);
+		articulos.put("ajo", 0.32);
+		articulos.put("jabon", 3.0);
+		articulos.put("manzana", 1.99);
+		articulos.put("tomate", 1.10);
+		articulos.put("platano", 1.40);
+		
+		ivaArticulos.put("patata", 4);
+		ivaArticulos.put("zanahoria", 4);
+		ivaArticulos.put("berenjena", 4);
+		ivaArticulos.put("pimiento", 4);
+		ivaArticulos.put("pan", 4);
+		ivaArticulos.put("ajo", 4);
+		ivaArticulos.put("jabon", 21);
+		ivaArticulos.put("manzana", 4);
+		ivaArticulos.put("tomate", 4);
+		ivaArticulos.put("platano", 4);
+		
 	}
 
 }
